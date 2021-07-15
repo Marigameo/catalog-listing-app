@@ -1,0 +1,20 @@
+.form {
+  padding: 2rem;
+  border: 1px solid lightseagreen;
+  min-height: 70vh;
+}
+
+.inputs {
+  padding: 7px;
+  margin: 5px;
+}
+
+.btn {
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: 500;
+  background-color: rgb(191, 219, 237);
+  color: rgb(37, 37, 121);
+}
