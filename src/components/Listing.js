@@ -1,7 +1,8 @@
 import React from 'react'
 import './listing.css'
+import Search from './Search'
 
-export default function Listing({products}) {
+export default function Listing({products, filterProducts}) {
     if(!products) {
         return <div>Loading products...</div>
     } else {
@@ -11,8 +12,10 @@ export default function Listing({products}) {
                 <h1>Ecommerce app</h1>
                 <button style={{height: '35px', cursor: 'pointer'}}>Admin console</button>
             </div>
+            <Search filterProducts={filterProducts}/>
             <div className="main">
-                {products.map(product => {
+                {
+                    products?.length > 0 ? products.map(product => {
                     return(
                         <div className="card">
                             <div className="imageBox">
@@ -26,7 +29,8 @@ export default function Listing({products}) {
                             </div>
                         </div>
                     )
-                })}
+                    }) : <h3 style={{textAlign: 'center'}}>No products found</h3>
+                }
             </div>
         </>
         )

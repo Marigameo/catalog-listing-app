@@ -8,8 +8,9 @@ export class App extends Component {
     super(props)
   
     this.state = {
-       isAdmin: false,
+       isAdmin: true,
        products: null,
+       afterFilter: null,
     }
   }
 
@@ -17,14 +18,22 @@ export class App extends Component {
     fetch('https://fakestoreapi.com/products/')
             .then(res=>res.json())
             .then(json => {
-              console.log('data', json)
-              this.setState({products: json})
+              console.log('json', json)
+              this.setState({products: json, afterFilter: json})
             })
+  }
+
+  filterProducts = (searchQuery) => {
+    const { products } = this.state
+    let filteredProducts = products.filter((product) => {
+      return product.title.toLowerCase().includes(searchQuery.toLowerCase())
+    })
+    this.setState({afterFilter: filteredProducts})
   }
   
   renderBody = () => {
     return(
-      this.state.isAdmin ? <ProductConsole/> : <Listing products={this.state.products}/>
+      this.state.isAdmin ? <ProductConsole/> : <Listing products={this.state.afterFilter} filterProducts={this.filterProducts}/>
     )
   }
 
